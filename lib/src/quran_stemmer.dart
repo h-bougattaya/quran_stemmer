@@ -173,17 +173,29 @@ class QuranStemmer implements Stemmer {
     // num=3  normalize initial hamza
     // num=4  all 1&2&3
     if (num == 1) {
-      word = DartArabic.stripDiacritics(word);
+      word = stripDiacritics(word);
     } else if (num == 2) {
       word = DartArabic.stripTatweel(word);
     } else if (num == 3) {
       word = DartArabic.normalizeHamzaTasheel(word);
     } else if (num == 4) {
-      word = DartArabic.stripDiacritics(word);
+      word = stripDiacritics(word);
       word = DartArabic.stripTatweel(word);
       word = DartArabic.normalizeHamzaTasheel(word);
     }
     return word;
+  }
+
+  String stripDiacritics(String word) {
+    word = DartArabic.stripDiacritics(word);
+    word = DartArabic.normalizeLetters(word);
+    // Remove start of hizb symbol
+    word = word.replaceAll(RegExp(r'\u06DE'), '');
+    for (int i = 0xFC00; i <= 0xFD1D; i++) {
+      // Remove number of ayah symbol
+      word = word.replaceAll(String.fromCharCode(i), '');
+    }
+    return word.replaceAll(RegExp(r'[\u064B-\u0652]'), '');
   }
 
   String _pre32(String word) {

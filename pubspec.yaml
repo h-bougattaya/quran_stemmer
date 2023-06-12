@@ -1,6 +1,6 @@
 name: quran_stemmer
 description: The Quran Stemmer is an implementation of the ISRI Stemmer algorithm for the Arabic language. The stemmer is specifically designed to process Quranic Arabic text by reducing words to their root forms, enabling various text analysis tasks such as information retrieval, text mining, and natural language processing.
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/h-bougattaya/quran_stemmer
 
 environment:
